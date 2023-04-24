@@ -15,9 +15,19 @@ button {
     margin-top: 0.6em;
   }
 
+  .question-buttons {
+    display: flex;
+    flex-direction: column;
+    flex-flow: column wrap;
+  }
+
   nav {
     float: right;
     margin: 0;
     padding: 0;
     display: table;
+}
+
+.hidden {
+  display: none;
 }
