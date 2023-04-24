@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,49 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Timed Coding Quiz</title>
 </head>
-<body>
-    <p>Click the button to start the game.</p>
 
-<p id="button" onclick="startGame()">Start game</p>
+<body>
+    <header>
+        <section>
+            <h1>Timed Coding Quiz</h1>
+            <nav>
+                <h2 class="time"></h2>
+            </nav>
+        </section>
+    </header>
+
+    <main>
+        <section>
+            <h2>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                answers will penalize your score/time by 15 seconds!</h2>
+        </section>
+
+        <section>
+            <button class="start-button">Start</button>
+        </section>
+
+        <section>
+            <p>Commonly used data types DO NOT include:</p>
+            <ol>
+                <button><li>strings</li></button>
+                <button><li>booleans</li></button>
+                <button><li>alerts</li></button>
+                <button><li>numbers</li></button>
+
+            </ul>
+        </section>
+
+        <!-- <section>
+            <h2 class="time"></h2>
+        </section> -->
+    </main>
+    <!-- <p>Click the button to start the game.</p>
+
+    <p id="button" onclick="startGame()">Start game</p> -->
 
 
 
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
