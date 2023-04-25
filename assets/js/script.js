@@ -99,6 +99,6 @@ function setTime() {
 
 // Attach event listener to start button to call startGame function on click
 startButton.addEventListener("click", startGame);
-// dataButtons.addEventListener("click", secondQuestion); 
+dataButtons.addEventListener("click", secondQuestion); 
 ifElseButtons.addEventListener("click", thirdQuestion); 
 arraysButtons.addEventListener("click", endGame);
