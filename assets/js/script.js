@@ -7,7 +7,10 @@ var firstQuestionSectionEl = document.querySelector("#first-question-section");
 var secondQuestionSectionEl = document.querySelector("#second-question-section");
 var thirdQuestionSectionEl = document.querySelector("#third-question-section");
 var endSectionEl = document.querySelector("#end-section");
-var questionButtons = document.querySelector(".question-buttons");
+// var questionButtons = document.querySelector(".question-buttons");
+var dataButtons = document.querySelector("#data");
+var ifElseButtons = document.querySelector("#if-else");
+var arraysButtons = document.querySelector("#arrays");
 var questions = [
 {
     title: "Commonly used data types DO NOT include:",
@@ -33,10 +36,19 @@ endSectionEl.setAttribute("class", "hidden");
 // The init function is called when the page loads?
 
 // declare a startGame function
-function firstQuestion() {
+function startGame() {
     startSectionEl.setAttribute("class", "hidden");
     firstQuestionSectionEl.classList.remove("hidden");
     setTime()
+    // dataButtons.addEventListener("click", function(event) {
+    //     var element = event.target;
+    //     if (element.matches("button")) {
+    //         var state = element.getAttribute("data-state");
+    //         if (state === "correct") {
+    //             dataButtons.addEventListener("click", secondQuestion); 
+    //         }
+    //     }
+    // });
 }
 
 function secondQuestion() {
@@ -47,6 +59,11 @@ function secondQuestion() {
 function thirdQuestion() {
     secondQuestionSectionEl.setAttribute("class", "hidden");
     thirdQuestionSectionEl.classList.remove("hidden");
+}
+
+function endGame() {
+    thirdQuestionSectionEl.setAttribute("class", "hidden");
+    endSectionEl.classList.remove("hidden");
 }
 
 // declare a startTimer function
@@ -81,6 +98,7 @@ function setTime() {
 // save initials (localStorage)
 
 // Attach event listener to start button to call startGame function on click
-startButton.addEventListener("click", firstQuestion);
-questionButtons.addEventListener("click", secondQuestion); 
-questionButtons.addEventListener("click", thirdQuestion); 
+startButton.addEventListener("click", startGame);
+// dataButtons.addEventListener("click", secondQuestion); 
+ifElseButtons.addEventListener("click", thirdQuestion); 
+arraysButtons.addEventListener("click", endGame);
