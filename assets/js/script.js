@@ -1,6 +1,7 @@
 // variables
 var startButton = document.querySelector(".start-button");
 var timeEl = document.querySelector(".time");
+var timerInterval;
 var secondsLeft = 75;
 var startSectionEl = document.querySelector("#start-section");
 var firstQuestionSectionEl = document.querySelector("#first-question-section");
@@ -14,34 +15,8 @@ var btncounter = document.querySelector("#btncounter")
 var btncountertwo = document.querySelector("#btncountertwo")
 var btncounterthree = document.querySelector("#btncounterthree")
 var finalScore = document.querySelector("#finalScore")
-var subtractedSeconds = 60;
+var btnStop = document.querySelector("#stop")
 
-
-var counter = 0;
-var count = localStorage.getItem("count");
-
-
-// var questionButtons = document.querySelector(".question-buttons");
-// var dataButtons = document.querySelector("#data");
-// var ifElseButtons = document.querySelector("#if-else");
-// var arraysButtons = document.querySelector("#arrays");
-// var questions = [
-// {
-//     title: "Commonly used data types DO NOT include:",
-//     choices: ["strings", "booleans", "alerts", "numbers"],
-//     correctAnswer: "alerts"
-// },
-// {
-//     title: "The condition in an if / else statement is enclosed with in ___.",
-//     choices: ["quotes", "curly brackets", "parenthesis", "square brackets"],
-//     correctAnswer: "curly brackets"
-// },
-// {
-//     title: "Arrays in JavaScript can be used to store ___.",
-//     choices: ["numbers and strings", "other arrays", "booleans", "all of the above"],
-//     correctAnswer: "all of the above"
-// },
-// ]
 
 firstQuestionSectionEl.setAttribute("class", "hidden");
 secondQuestionSectionEl.setAttribute("class", "hidden");
@@ -71,20 +46,30 @@ function endGame() {
     endSectionEl.classList.remove("hidden");
 }
 
+
 // declare a startTimer function
 var timeEl = document.querySelector(".time");
 
 function setTime() {
     // Sets interval in variable
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = secondsLeft + " seconds left";
-        // Subtract time when question is answered incorrectly
-        if (secondsLeft === 0) {
-            // Stops execution of action at set interval
+        if (secondsLeft <= 0) {
             clearInterval(timerInterval);
-            // Calls function to create and append image
-            // sendMessage();
+
+
+        //     if (isWin && secondsLeft > 0) {
+        //         clearInterval(timerInterval);
+        //         // winGame();
+        // }
+    
+        // }
+
+        // if (secondsLeft === 0) {
+        //     // Stops execution of action at set interval
+        //     clearInterval(timerInterval);
+        //     endGame();
         }
 
     }, 1000);
@@ -92,15 +77,10 @@ function setTime() {
 function checkAnswerOne(e) {
     var btn = e.target
     if (!btn.matches(".correct")) {
-        // decrement by 15? seconds and update the content of the time element
-        subtractedSeconds--;
-        timeEl.textContent = subtractedSeconds + " seconds left";
-        setTime()
-        // timerInterval = setInterval(function() {
-        //     subtractedSecondsLeft--;
-        //     timeEl.textContent = subtractedSecondsLeft + " seconds left";
-        // })
-        return
+        // decrement by 15 seconds 
+        secondsLeft-= 15;
+    } else {
+
     }
     console.log("correct");
     secondQuestion();
@@ -109,22 +89,29 @@ function checkAnswerOne(e) {
 function checkAnswerTwo(e) {
     var btn = e.target
     if (!btn.matches(".correct")) {
-        // decrement by 15 seconds and update the content of the time element
-        return
+        // decrement by 15 seconds
+        secondsLeft-= 15;
+    } else {
+        
     }
     console.log("correct");
     thirdQuestion();
 }
 
+
 function checkAnswerThree(e) {
     var btn = e.target
     if (!btn.matches(".correct")) {
-        // decrement by 15 seconds and update the content of the time element
-        return
+        // decrement by 15
+        secondsLeft-= 15;
+    } else {
+     
     }
     console.log("correct");
     endGame();
 }
+
+
 // create an array for players scores and initials declare a variable for high scores set this variable to either the high scores arrays that we get from local storage || empty array []
 // every time a player finishes and enters their initials and submit then push to the high score array in local storage
 // Below is from the mini project
@@ -141,30 +128,6 @@ function checkAnswerThree(e) {
 //     //Render win count to page
 //     win.textContent = winCounter;
 //   }
-// btncounter.addEventListener("click", function() {
-    
-//     counter++;
-//     console.log(counter);
-//     counter.textContent = count;
-//     localStorage.setItem("count", counter);
-    
-// })
-
-// btncountertwo.addEventListener("click", function() {
-  
-//     counter++;
-//     console.log(counter);
-//     counter.textContent = count;
-//     localStorage.setItem("count", counter);
-// })
-// btncounterthree.addEventListener("click", function() {
-
-//     counter++;
-//     console.log(counter);
-//     counter.textContent = count;
-//     localStorage.setItem("count", counter);
-// })
-
 
 
 
@@ -175,13 +138,11 @@ function checkAnswerThree(e) {
 // The gameOver function is called when timer reaches 0
 
 
-// answerContainer.addEventListener("click", checkAnswerOne)
-
 // save initials (localStorage)
 
 // Attach event listener to start button to call startGame function on click
 startButton.addEventListener("click", startGame);
-answerContainer.addEventListener("click", checkAnswerOne)
-answerContainerTwo.addEventListener("click", checkAnswerTwo)
-answerContainerThree.addEventListener("click", checkAnswerThree)
+answerContainer.addEventListener("click", checkAnswerOne);
+answerContainerTwo.addEventListener("click", checkAnswerTwo);
+answerContainerThree.addEventListener("click", checkAnswerThree);
 // arraysButtons.addEventListener("click", endGame);
