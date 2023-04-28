@@ -14,40 +14,43 @@ var answerContainerThree = document.getElementById("answer-container-three")
 var btncounter = document.querySelector("#btncounter")
 var btncountertwo = document.querySelector("#btncountertwo")
 var btncounterthree = document.querySelector("#btncounterthree")
-var finalScore = document.querySelector("#finalScore")
-var btnStop = document.querySelector("#stop")
+var userInitialsSpan = document.querySelector("#user-initials");
 
-
+// This is to hide the questions
 firstQuestionSectionEl.setAttribute("class", "hidden");
 secondQuestionSectionEl.setAttribute("class", "hidden");
 thirdQuestionSectionEl.setAttribute("class", "hidden");
 endSectionEl.setAttribute("class", "hidden");
-// The init function is called when the page loads?
 
-// declare a startGame function
+// declaring a startGame function
 function startGame() {
     startSectionEl.setAttribute("class", "hidden");
+    // This is to reveal the question
     firstQuestionSectionEl.classList.remove("hidden");
     setTime()
 }
 
 function secondQuestion() {
     firstQuestionSectionEl.setAttribute("class", "hidden");
+    // This is to reveal the question
     secondQuestionSectionEl.classList.remove("hidden");
 }
 
 function thirdQuestion() {
     secondQuestionSectionEl.setAttribute("class", "hidden");
+    // This is to reveal the question
     thirdQuestionSectionEl.classList.remove("hidden");
 }
 
 function endGame() {
     thirdQuestionSectionEl.setAttribute("class", "hidden");
+    // This is to reveal the last section displaying the remaining seconds
     endSectionEl.classList.remove("hidden");
+    clearInterval(timerInterval);
 }
 
 
-// declare a startTimer function
+// declaring a startTimer function
 var timeEl = document.querySelector(".time");
 
 function setTime() {
@@ -55,21 +58,9 @@ function setTime() {
     timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = secondsLeft + " seconds left";
+    //    To stop timer at the end of the game
         if (secondsLeft <= 0) {
-            clearInterval(timerInterval);
-
-
-        //     if (isWin && secondsLeft > 0) {
-        //         clearInterval(timerInterval);
-        //         // winGame();
-        // }
-    
-        // }
-
-        // if (secondsLeft === 0) {
-        //     // Stops execution of action at set interval
-        //     clearInterval(timerInterval);
-        //     endGame();
+            endGame();
         }
 
     }, 1000);
@@ -77,24 +68,18 @@ function setTime() {
 function checkAnswerOne(e) {
     var btn = e.target
     if (!btn.matches(".correct")) {
-        // decrement by 15 seconds 
-        secondsLeft-= 15;
-    } else {
-
+        // decrement by 15 seconds if incorrect or move on if it is correct
+        secondsLeft -= 15;
     }
-    console.log("correct");
     secondQuestion();
 }
 
 function checkAnswerTwo(e) {
     var btn = e.target
     if (!btn.matches(".correct")) {
-        // decrement by 15 seconds
-        secondsLeft-= 15;
-    } else {
-        
+        // decrement by 15 seconds if incorrect or move on if it is correct
+        secondsLeft -= 15;
     }
-    console.log("correct");
     thirdQuestion();
 }
 
@@ -102,47 +87,33 @@ function checkAnswerTwo(e) {
 function checkAnswerThree(e) {
     var btn = e.target
     if (!btn.matches(".correct")) {
-        // decrement by 15
-        secondsLeft-= 15;
-    } else {
-     
+        // decrement by 15 seconds if incorrect or move on if it is correct
+        secondsLeft -= 15;
     }
-    console.log("correct");
     endGame();
 }
+function renderLastRegistered() {
+userInitialsSpan.textContent = localStorage.getItem("initials");
+secondsLeft.textContent = localStorage.getItem("score");
+}
+// Store initials and remaining time in localStorage
+var submitBtn = document.querySelector("#submit")
+
+submitBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    var initials = document.querySelector("#initials").value;
+    
+    localStorage.setItem("initials", initials);
+    initials.textContent = localStorage.getItem("initials");
+    localStorage.setItem("score", secondsLeft);
+    finalScore.textContent = localStorage.getItem("score");
+    renderLastRegistered();
+}
+);
 
 
-// create an array for players scores and initials declare a variable for high scores set this variable to either the high scores arrays that we get from local storage || empty array []
-// every time a player finishes and enters their initials and submit then push to the high score array in local storage
-// Below is from the mini project
-// function getWins() {
-//     // Get stored value from client storage, if it exists
-//     var storedWins = localStorage.getItem("winCount");
-//     // If stored value doesn't exist, set counter to 0
-//     if (storedWins === null) {
-//       winCounter = 0;
-//     } else {
-//       // If a value is retrieved from client storage set the winCounter to that value
-//       winCounter = storedWins;
-//     }
-//     //Render win count to page
-//     win.textContent = winCounter;
-//   }
-
-
-
-// gameDone function called when all questions are answered
-
-
-
-// The gameOver function is called when timer reaches 0
-
-
-// save initials (localStorage)
-
-// Attach event listener to start button to call startGame function on click
+// Event listeners
 startButton.addEventListener("click", startGame);
 answerContainer.addEventListener("click", checkAnswerOne);
 answerContainerTwo.addEventListener("click", checkAnswerTwo);
 answerContainerThree.addEventListener("click", checkAnswerThree);
-// arraysButtons.addEventListener("click", endGame);
